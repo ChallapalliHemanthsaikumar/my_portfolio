@@ -103,6 +103,7 @@ const Chatbot: React.FC = () => {
         setIsTyping(false);
       }, 1000);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getAIResponse = async (userMessage: string): Promise<string> => {
