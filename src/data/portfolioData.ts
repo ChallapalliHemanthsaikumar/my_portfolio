@@ -171,7 +171,7 @@ export const projects: Project[] = [
     title: "Multi-Modal Generative LLM",
     description: "Architected a cross-modal generative framework for bidirectional synthesis of text and images using Diffusion Probabilistic Models with U-Net Architecture and CLIP Embeddings. Implemented DDPM-based pipeline with attention-enhanced U-Net and linear beta scheduling.",
     techStack: ["Python", "PyTorch", "Hugging Face", "CLIP", "Diffusion Models", "U-Net", "Scikit-learn"],
-    githubUrl: "https://github.com/ChallapalliHemanthsaikumar/multimodal-llm",
+    githubUrl: "https://github.com/ChallapalliHemanthsaikumar/stable_diffusion",
     featured: true,
     category: "AI/ML"
   },
