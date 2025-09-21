@@ -1,0 +1,46 @@
+{
+  "personalInfo": {
+    "name": "Hemanthsaikumar Challapalli",
+    "title": "AI Engineer & Data Scientist",
+    "location": "Redmond, WA",
+    "email": "challapallihemanthsaikumar@gmail.com",
+    "phone": "856-656-8253",
+    "introVideoUrl": "",
+    "summary": "Innovative AI/NLP Engineer and Data Scientist with extensive hands-on experience in designing, optimizing, and deploying cutting-edge generative AI and machine learning solutions. Known for reducing customer support response times by 40% through the development of LangChain-powered AI agents and achieving 92% accuracy in sentiment classification using DistilBERT pipelines.",
+    "githubUsername": "ChallapalliHemanthsaikumar",
+    "linkedinUrl": "https://www.linkedin.com/in/hemanthsaikumar-challapalli",
+    "youtubeChannelUrl": "https://youtube.com/@hemanthsaikumar"
+  },
+  "quickUpdates": {
+    "isAvailableForWork": true,
+    "currentFocus": "AI/ML Engineering & Full Stack Development",
+    "recentAchievements": [
+      "Reduced customer support response times by 40% with LangChain AI agents",
+      "Achieved 92% accuracy in sentiment classification using DistilBERT",
+      "Published Chrome Extension with 1000+ downloads",
+      "5 Professional certifications in Azure and AWS"
+    ]
+  },
+  "featuredProjects": [
+    "multimodal-llm",
+    "job-tracker-extension", 
+    "ai-customer-support"
+  ],
+  "socialMediaHandles": {
+    "github": "ChallapalliHemanthsaikumar",
+    "linkedin": "hemanthsaikumar-challapalli",
+    "youtube": "@hemanthsaikumar",
+    "twitter": ""
+  },
+  "updateInstructions": {
+    "lastUpdated": "2024-09-20",
+    "nextUpdate": "Add YouTube videos when available",
+    "quickTasks": [
+      "Record and upload intro video",
+      "Add actual GitHub repository links",
+      "Update LinkedIn and YouTube URLs",
+      "Add project screenshots/demos",
+      "Create and upload resume PDF"
+    ]
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "version": 2,
+  "name": "my-portfolio",
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "build"
+      }
+    },
+    {
+      "src": "api/**/*.ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ],
+  "env": {
+    "GEMINI_API_KEY": "@gemini-api-key"
+  },
+  "build": {
+    "env": {
+      "REACT_APP_NODE_ENV": "production"
+    }
+  }
+}
