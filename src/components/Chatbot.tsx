@@ -324,7 +324,7 @@ What would you like to know?`;
         }
       }, 100);
     }
-  }, [inputMessage]);
+  }, [inputMessage, sendMessage]);
 
   const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
