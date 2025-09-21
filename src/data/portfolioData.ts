@@ -228,6 +228,15 @@ export const achievements: Achievement[] = [
     date: "2024",
     type: "publication",
     url: "https://chromewebstore.google.com/detail/job-application-tracker/pmebegkjgfjjkphgdchhlafbhdagjhnb"
+  },
+  {
+    id: "strands-agents-contribution",
+    title: "Open Source Contribution - Strands Agents Tools",
+    description: "Fixed Mem0 LLM configuration integration in strands-agents/tools repository",
+    date: "2025",
+    type: "contribution",
+    url: "https://github.com/strands-agents/tools/pull/221",
+    organization: "Strands Agents"
   }
   // Add more achievements here
 ];

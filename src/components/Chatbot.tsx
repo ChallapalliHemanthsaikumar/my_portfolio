@@ -12,6 +12,8 @@ import {
   Maximize2
 } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
+import { marked } from "marked";
+
 
 interface Message {
   id: string;
@@ -140,8 +142,8 @@ const Chatbot: React.FC = () => {
               (lowerResponse.includes('feedback') || lowerResponse.includes('review'))) {
             setTimeout(() => setShowFeedbackForm(true), 500);
           }
-          
-          return data.response;
+          return marked.parse(data.response);
+          // return data.response;
         } else {
           console.warn('API call failed, using offline response');
           return getOfflineResponse(userMessage);
@@ -171,15 +173,12 @@ PERSONAL INFORMATION:
 - GitHub: ChallapalliHemanthsaikumar
 
 PROFESSIONAL SUMMARY:
-Innovative AI/NLP Engineer and Data Scientist with extensive hands-on experience in designing, optimizing, and deploying cutting-edge generative AI and machine learning solutions. Known for reducing customer support response times by 40% through the development of LangChain-powered AI agents and achieving 92% accuracy in sentiment classification using DistilBERT pipelines.
-
-KEY PROJECTS:
+Innovative AI/NLP Engineer and Data Scientist with extensive hands-on experience in designing, optimizing, and deploying cutting-edge generative AI and machine learning solutions.
 1. Voice-Enabled AI Agent - Advanced voice processing with NLP capabilities
 2. Microsoft OAuth with AWS Bedrock - Secure authentication for AI agents (has YouTube tutorial)
 3. Multi-Modal Generative LLM - Cross-modal framework using Diffusion Models and CLIP
 4. Meta Llama 2 Fine-tuning Pipeline - Custom model on Hugging Face: https://huggingface.co/Hemanthchallapalli/lora-llama2-about-me
-5. AI Customer Support Agent - LangChain-powered system reducing response time by 40%
-6. Job Application Tracker Chrome Extension - Published with 1000+ downloads
+
 
 TECHNICAL SKILLS:
 - Programming: Python (with Numba JIT), TypeScript, Rust, SQL
@@ -196,12 +195,7 @@ CERTIFICATIONS:
 - AWS Certified Solutions Architect – Associate
 - Deep Learning Specialization (Coursera)
 
-ACHIEVEMENTS:
-- 40% reduction in customer support response times
-- 92% accuracy in sentiment classification
-- 30% improvement in ML workload efficiency
-- 95% precision in text and image retrieval systems
-- Published Chrome Extension with 1000+ downloads
+
 
 YOUTUBE CONTENT:
 Featured video: "Microsoft OAuth authentication with AWS Bedrock AgentCore"
@@ -269,7 +263,7 @@ Remember to be helpful, professional, and knowledgeable about Hemanth's backgrou
 • **Voice-Enabled AI Agent** - Advanced voice processing with NLP capabilities
 • **Multi-Modal Generative LLM** - Cross-modal framework using Diffusion Models and CLIP
 • **Meta Llama 2 Fine-tuning** - Custom model training with LoRA and QLoRA on Azure ML
-• **AI Customer Support Agent** - LangChain-powered system reducing response time by 40%
+
 
 You can explore all his projects in the Projects section above, or ask me about any specific project!`;
     }
@@ -289,9 +283,7 @@ He has 5+ certifications including Azure AI Engineer, Azure Data Scientist, and 
       return `Hemanth is an innovative AI/NLP Engineer and Data Scientist with extensive experience in:
 
 • Designing and deploying cutting-edge generative AI solutions
-• Reducing customer support response times by 40% through LangChain-powered AI agents
-• Achieving 92% accuracy in sentiment classification using DistilBERT
-• Fine-tuning LLMs with 30% improvement in ML workload efficiency
+
 
 He's based in Redmond, WA and has published work including a Chrome Extension with 1000+ downloads!`;
     }

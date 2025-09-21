@@ -124,7 +124,7 @@ const ProjectsSection: React.FC = () => {
         >
           <h2 className="section-title">Featured Projects</h2>
           <p className="text-xl text-secondary-600 max-w-3xl mx-auto">
-            A showcase of my latest work in AI/ML, Full Stack Development, and Data Science
+             My latest work in AI/ML, Full Stack Development, and Data Science
           </p>
         </motion.div>
 
