@@ -78,7 +78,7 @@ const Chatbot: React.FC = () => {
     }
   }, [isOpen, isMinimized]);
 
-  const sendMessage = async (content: string, isUser: boolean = true) => {
+  const sendMessage = useCallback(async (content: string, isUser: boolean = true) => {
     const newMessage: Message = {
       id: Date.now().toString(),
       content,
@@ -103,7 +103,7 @@ const Chatbot: React.FC = () => {
         setIsTyping(false);
       }, 1000);
     }
-  };
+  }, []);
 
   const getAIResponse = async (userMessage: string): Promise<string> => {
     try {
