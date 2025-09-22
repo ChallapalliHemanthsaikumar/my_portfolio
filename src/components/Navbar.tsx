@@ -43,8 +43,7 @@ const Navbar: React.FC = () => {
           <motion.div
             whileHover={{ scale: 1.05 }}
             className="text-2xl font-bold text-primary-600"
-          >
-           <img src="/favicon.png" alt="Logo" className="w-20 h-20 object-contain rounded-full border border-gray-300 shadow-sm" />
+          ><img src="/favicon.png" alt="Logo" className="w-20 h-20 object-contain rounded-full shadow-sm" />
           </motion.div>
 
           {/* Desktop Navigation */}

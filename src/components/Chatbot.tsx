@@ -142,7 +142,7 @@ const Chatbot: React.FC = () => {
               (lowerResponse.includes('feedback') || lowerResponse.includes('review'))) {
             setTimeout(() => setShowFeedbackForm(true), 500);
           }
-          return marked.parse(data.response);
+          return data.response;
           // return data.response;
         } else {
           console.warn('API call failed, using offline response');
@@ -395,11 +395,19 @@ What would you like to know?`;
                   }`}
                 >
                   <div className="flex items-start gap-2">
+  {!message.isUser && <Bot size={16} className="mt-1 flex-shrink-0" />}
+  <div
+    className="text-sm whitespace-pre-line"
+    dangerouslySetInnerHTML={{ __html: marked.parse(message.content) as string }}
+  />
+  {message.isUser && <User size={16} className="mt-1 flex-shrink-0" />}
+</div>
+                  {/* <div className="flex items-start gap-2">
                     {!message.isUser && <Bot size={16} className="mt-1 flex-shrink-0" />}
-                    <div className="text-sm whitespace-pre-line">{message.content}</div>
-                    {message.isUser && <User size={16} className="mt-1 flex-shrink-0" />}
+                    <div className="text-sm whitespace-pre-line">{marked.parse(message.content)}</div>
+                    {message.isUser && <User size={16} className="mt-1 flex-shrink-0" />} */}
                   </div>
-                </div>
+                {/* </div> */}
               </div>
             ))}
             
