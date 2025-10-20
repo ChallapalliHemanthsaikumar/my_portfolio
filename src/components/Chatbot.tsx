@@ -208,23 +208,50 @@ Remember to be helpful, professional, and knowledgeable about Hemanth's backgrou
       const ai = new GoogleGenAI({
         apiKey: process.env.REACT_APP_GEMINI_API_KEY!
       });
+const response = await fetch(
+      "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-goog-api-key": process.env.REACT_APP_GEMINI_API_KEY || "",
+        },
+        body: JSON.stringify({
+          contents: [
+            {
+              parts: [
+                {
+                  text: prompt,
+                },
+              ],
+            },
+          ],
+        }),
+      }
+    );
 
-      const response = await ai.models.generateContent({
-        model: "gemini-2.5-flash",
-        contents: prompt,
-        config: {
-          thinkingConfig: {
-            thinkingBudget: 0, // Disable thinking for faster responses
-          },
-        }
-      });
+    if (!response.ok) {
+      throw new Error(`API call failed: ${response.statusText}`);
+    }
 
-      const aiResponse = response.text || 'Sorry, I could not generate a response.';
+    const data = await response.json();
+    return data.candidates[0].content.parts[0].text || "Sorry, I could not generate a response.";
+      // const response = await ai.models.generateContent({
+      //   model: "gemini-2.5-flash",
+      //   contents: prompt,
+      //   config: {
+      //     thinkingConfig: {
+      //       thinkingBudget: 0, // Disable thinking for faster responses
+      //     },
+      //   }
+      // });
+
+      // const aiResponse = response.text || 'Sorry, I could not generate a response.';
       
-      // Check if the response suggests showing forms
+      // // Check if the response suggests showing forms
   
       
-      return aiResponse;
+      // return aiResponse;
     } catch (error) {
       console.error('Gemini API error:', error);
       throw error;
