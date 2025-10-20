@@ -205,9 +205,9 @@ Remember to be helpful, professional, and knowledgeable about Hemanth's backgrou
 
       const prompt = `${HEMANTH_KNOWLEDGE_BASE}\n\nUser question: ${userMessage}\n\nPlease provide a helpful and informative response about Hemanth:`;
       
-      const ai = new GoogleGenAI({
-        apiKey: process.env.REACT_APP_GEMINI_API_KEY!
-      });
+      // const ai = new GoogleGenAI({
+      //   apiKey: process.env.REACT_APP_GEMINI_API_KEY!
+      // });
 const response = await fetch(
       "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
       {
