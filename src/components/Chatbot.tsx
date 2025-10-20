@@ -169,7 +169,7 @@ PERSONAL INFORMATION:
 - Email: challapallihemanthsaikumar@gmail.com
 - Phone: 856-656-8253
 - LinkedIn: https://www.linkedin.com/in/challapalli-hemanth-sai-kumar-7595931b0/
-- YouTube: https://youtube.com/@hemanthsaikumar
+- YouTube: https://www.youtube.com/@hemanthchowdary8184
 - GitHub: ChallapalliHemanthsaikumar
 
 PROFESSIONAL SUMMARY:
@@ -222,18 +222,7 @@ Remember to be helpful, professional, and knowledgeable about Hemanth's backgrou
       const aiResponse = response.text || 'Sorry, I could not generate a response.';
       
       // Check if the response suggests showing forms
-      const lowerMessage = userMessage.toLowerCase();
-      const lowerResponse = aiResponse.toLowerCase();
-      
-      if ((lowerMessage.includes('contact') || lowerMessage.includes('get in touch') || lowerMessage.includes('email')) &&
-          (lowerResponse.includes('contact') || lowerResponse.includes('get in touch'))) {
-        setTimeout(() => setShowContactForm(true), 500);
-      }
-      
-      if ((lowerMessage.includes('feedback') || lowerMessage.includes('review') || lowerMessage.includes('opinion')) &&
-          (lowerResponse.includes('feedback') || lowerResponse.includes('review'))) {
-        setTimeout(() => setShowFeedbackForm(true), 500);
-      }
+  
       
       return aiResponse;
     } catch (error) {
@@ -243,66 +232,7 @@ Remember to be helpful, professional, and knowledgeable about Hemanth's backgrou
   };
 
   const getOfflineResponse = (userMessage: string): string => {
-    const lowerMessage = userMessage.toLowerCase();
-    
-    if (lowerMessage.includes('contact') || lowerMessage.includes('get in touch') || lowerMessage.includes('email')) {
-      // Only show form after user sends the message, not while typing
-      setTimeout(() => setShowContactForm(true), 500);
-      return "I'd be happy to help you get in touch with Hemanth! Let me show you a contact form where you can leave your details and message.";
-    }
-    
-    if (lowerMessage.includes('feedback') || lowerMessage.includes('review') || lowerMessage.includes('opinion')) {
-      // Only show form after user sends the message, not while typing
-      setTimeout(() => setShowFeedbackForm(true), 500);
-      return "Thank you for wanting to provide feedback! Your input is valuable. Let me show you a feedback form.";
-    }
-    
-    if (lowerMessage.includes('project') || lowerMessage.includes('work')) {
-      return `Hemanth has worked on several impressive AI/ML projects including:
-
-• **Voice-Enabled AI Agent** - Advanced voice processing with NLP capabilities
-• **Multi-Modal Generative LLM** - Cross-modal framework using Diffusion Models and CLIP
-• **Meta Llama 2 Fine-tuning** - Custom model training with LoRA and QLoRA on Azure ML
-
-
-You can explore all his projects in the Projects section above, or ask me about any specific project!`;
-    }
-    
-    if (lowerMessage.includes('skill') || lowerMessage.includes('technology') || lowerMessage.includes('expertise')) {
-      return `Hemanth is an expert in:
-
-**AI/ML:** PyTorch, JAX, Hugging Face Transformers, LangChain, LangGraph
-**Cloud & MLOps:** Azure ML, AWS, Docker, Kubernetes, MLflow
-**Programming:** Python (with Numba JIT), TypeScript, Rust, SQL
-**Databases:** PostgreSQL, MongoDB, Vector Databases (Pinecone, AI Search)
-
-He has 5+ certifications including Azure AI Engineer, Azure Data Scientist, and AWS Solutions Architect!`;
-    }
-    
-    if (lowerMessage.includes('experience') || lowerMessage.includes('background')) {
-      return `Hemanth is an innovative AI/NLP Engineer and Data Scientist with extensive experience in:
-
-• Designing and deploying cutting-edge generative AI solutions
-
-
-He's based in Redmond, WA and has published work including a Chrome Extension with 1000+ downloads!`;
-    }
-    
-    if (lowerMessage.includes('youtube') || lowerMessage.includes('video') || lowerMessage.includes('tutorial')) {
-      return `Hemanth creates educational content on YouTube! His featured video is "Microsoft OAuth authentication with AWS Bedrock AgentCore" - a comprehensive tutorial on implementing secure authentication for AI agents.
-
-You can check out his YouTube section above or visit his channel directly!`;
-    }
-    
-    return `I'd be happy to help you learn more about Hemanth! You can ask me about:
-
-• His **projects** and technical work
-• His **skills** and expertise
-• His **experience** and achievements
-• His **YouTube** content and tutorials
-• How to **contact** him or provide **feedback**
-
-What would you like to know?`;
+    return "error"
   };
 
   const handleSubmit = useCallback((e: React.FormEvent) => {
