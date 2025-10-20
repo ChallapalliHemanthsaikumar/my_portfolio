@@ -74,52 +74,68 @@ export const generateChatResponse = async (userMessage: string): Promise<string>
     return "I am not available right now contact hemanth directly via email challapallihemanthsaikumar@gmail.com";
   }
 
-  try {
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-goog-api-key': apiKey,
-        },
-        body: JSON.stringify({
-          contents: [
-            {
-              parts: [
-                {
-                  text: `${HEMANTH_KNOWLEDGE_BASE}
 
-User Message: "${userMessage}"
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt }),
+      });
 
-Please respond as Hemanth's AI assistant. Be helpful, professional, and provide specific information about his work when relevant. Keep responses conversational and not too long (2-3 paragraphs max). If the user wants to contact Hemanth or provide feedback, mention that you can help them with that.`
-                }
-              ]
-            }
-          ],
-          generationConfig: {
-            temperature: 0.7,
-            topK: 40,
-            topP: 0.95,
-            maxOutputTokens: 512,
-          },
-        }),
-      }
-    );
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      const data = await res.json();
+      return data
+    } catch (error) {
+      console.error("Error:", error);
+      return "error"
     }
+  };
 
-    const data = await response.json();
+//   try {
+//     const response = await fetch(
+//       `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent`,
+//       {
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json',
+//           'X-goog-api-key': apiKey,
+//         },
+//         body: JSON.stringify({
+//           contents: [
+//             {
+//               parts: [
+//                 {
+//                   text: `${HEMANTH_KNOWLEDGE_BASE}
+
+// User Message: "${userMessage}"
+
+// Please respond as Hemanth's AI assistant. Be helpful, professional, and provide specific information about his work when relevant. Keep responses conversational and not too long (2-3 paragraphs max). If the user wants to contact Hemanth or provide feedback, mention that you can help them with that.`
+//                 }
+//               ]
+//             }
+//           ],
+//           generationConfig: {
+//             temperature: 0.7,
+//             topK: 40,
+//             topP: 0.95,
+//             maxOutputTokens: 512,
+//           },
+//         }),
+//       }
+//     );
+
+//     if (!response.ok) {
+//       throw new Error(`HTTP error! status: ${response.status}`);
+//     }
+
+//     const data = await response.json();
     
-    if (data.candidates && data.candidates[0] && data.candidates[0].content) {
-      return data.candidates[0].content.parts[0].text;
-    } else {
-      throw new Error('Invalid response format from Gemini API');
-    }
-  } catch (error) {
-    console.error('Error calling Gemini API:', error);
-    return "I am not available right now contact hemanth directly via email challapallihemanthsaikumar@gmail.com";
-  }
-};
+//     if (data.candidates && data.candidates[0] && data.candidates[0].content) {
+//       return data.candidates[0].content.parts[0].text;
+//     } else {
+//       throw new Error('Invalid response format from Gemini API');
+//     }
+//   } catch (error) {
+//     console.error('Error calling Gemini API:', error);
+//     return "I am not available right now contact hemanth directly via email challapallihemanthsaikumar@gmail.com";
+//   }
+// };
