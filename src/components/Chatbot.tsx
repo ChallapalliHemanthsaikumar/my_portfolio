@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
 import { marked } from "marked";
+import { generateChatResponse } from '../api/chatService';
 
 
 interface Message {
@@ -156,106 +157,7 @@ const Chatbot: React.FC = () => {
   };
 
   const callGeminiAPI = async (userMessage: string): Promise<string> => {
-    try {
-      const { GoogleGenAI } = await import("@google/genai");
-      
-      const HEMANTH_KNOWLEDGE_BASE = `
-You are Hemanth's AI assistant on his portfolio website. You know everything about Hemanthsaikumar Challapalli and should provide helpful, accurate information about him. Here's what you need to know:
-
-PERSONAL INFORMATION:
-- Name: Hemanthsaikumar Challapalli
-- Title: AI Engineer & Data Scientist
-- Location: Redmond, WA
-- Email: challapallihemanthsaikumar@gmail.com
-- Phone: 856-656-8253
-- LinkedIn: https://www.linkedin.com/in/challapalli-hemanth-sai-kumar-7595931b0/
-- YouTube: https://www.youtube.com/@hemanthchowdary8184
-- GitHub: ChallapalliHemanthsaikumar
-
-PROFESSIONAL SUMMARY:
-Innovative AI/NLP Engineer and Data Scientist with extensive hands-on experience in designing, optimizing, and deploying cutting-edge generative AI and machine learning solutions.
-1. Voice-Enabled AI Agent - Advanced voice processing with NLP capabilities
-2. Microsoft OAuth with AWS Bedrock - Secure authentication for AI agents (has YouTube tutorial)
-3. Multi-Modal Generative LLM - Cross-modal framework using Diffusion Models and CLIP
-4. Meta Llama 2 Fine-tuning Pipeline - Custom model on Hugging Face: https://huggingface.co/Hemanthchallapalli/lora-llama2-about-me
-
-
-TECHNICAL SKILLS:
-- Programming: Python (with Numba JIT), TypeScript, Rust, SQL
-- AI/ML: PyTorch, JAX, Hugging Face Transformers, LangChain, LangGraph
-- Cloud & MLOps: Azure ML, AWS, Docker, Kubernetes, Apache Airflow, MLflow
-- Frontend: React, Angular, Next.js, Vite
-- Backend: FastAPI, Node.js, gRPC
-- Databases: PostgreSQL, MongoDB, Vector Databases (Pinecone, AI Search)
-
-CERTIFICATIONS:
-- Azure AI Engineer Associate (Microsoft)
-- Azure Data Scientist Associate (Microsoft)  
-- Azure Developer Associate (Microsoft)
-- AWS Certified Solutions Architect – Associate
-- Deep Learning Specialization (Coursera)
-
-
-
-YOUTUBE CONTENT:
-Featured video: "Microsoft OAuth authentication with AWS Bedrock AgentCore"
-
-Remember to be helpful, professional, and knowledgeable about Hemanth's background and achievements.
-`;
-
-      const prompt = `${HEMANTH_KNOWLEDGE_BASE}\n\nUser question: ${userMessage}\n\nPlease provide a helpful and informative response about Hemanth:`;
-      
-      // const ai = new GoogleGenAI({
-      //   apiKey: process.env.REACT_APP_GEMINI_API_KEY!
-      // });
-const response = await fetch(
-      "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-goog-api-key": process.env.REACT_APP_GEMINI_API_KEY || "",
-        },
-        body: JSON.stringify({
-          contents: [
-            {
-              parts: [
-                {
-                  text: prompt,
-                },
-              ],
-            },
-          ],
-        }),
-      }
-    );
-
-    if (!response.ok) {
-      throw new Error(`API call failed: ${response.statusText}`);
-    }
-
-    const data = await response.json();
-    return data.candidates[0].content.parts[0].text || "Sorry, I could not generate a response.";
-      // const response = await ai.models.generateContent({
-      //   model: "gemini-2.5-flash",
-      //   contents: prompt,
-      //   config: {
-      //     thinkingConfig: {
-      //       thinkingBudget: 0, // Disable thinking for faster responses
-      //     },
-      //   }
-      // });
-
-      // const aiResponse = response.text || 'Sorry, I could not generate a response.';
-      
-      // // Check if the response suggests showing forms
-  
-      
-      // return aiResponse;
-    } catch (error) {
-      console.error('Gemini API error:', error);
-      throw error;
-    }
+    return await generateChatResponse(userMessage);
   };
 
   const getOfflineResponse = (userMessage: string): string => {
