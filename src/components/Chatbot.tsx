@@ -13,7 +13,7 @@ import {
 } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
 import { marked } from "marked";
-import { generateChatResponse } from '../api/chatService';
+import { generateChatResponse } from '../apiservice/chatService';
 
 
 interface Message {
