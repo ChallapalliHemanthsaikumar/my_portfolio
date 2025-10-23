@@ -1,8 +1,3 @@
-import { personalInfo, projects, certifications, skills } from '../data/portfolioData';
-
-// Knowledge base about Hemanth for the AI chatbot
-
-
 export const generateChatResponse = async (userMessage: string): Promise<string> => {
   try {
     const res = await fetch("/api/chat", {
