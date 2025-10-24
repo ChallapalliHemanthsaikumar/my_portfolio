@@ -64,63 +64,117 @@ You can help visitors:
 
 Always be encouraging about potential collaborations and highlight Hemanth's innovative approach to AI/ML engineering.
 `;
-export default async function handler(req: VercelRequest, res: VercelResponse) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
-  }
+// export default async function handler(req: VercelRequest, res: VercelResponse) {
+//   if (req.method !== "POST") {
+//     return res.status(405).json({ error: "Method not allowed" });
+//   }
 
-  const { message } = req.body;
+//   const { message } = req.body;
 
-  if (!message) {
-    return res.status(400).json({ error: "Message is required" });
-  }
+//   if (!message) {
+//     return res.status(400).json({ error: "Message is required" });
+//   }
 
-  try {
-    // Combine knowledge base with user message
-    const prompt = `${HEMANTH_KNOWLEDGE_BASE}\n\nUser question: ${message}\n\nPlease provide a helpful and informative response about Hemanth:`;
+//   try {
+//     // Combine knowledge base with user message
+//     const prompt = `${HEMANTH_KNOWLEDGE_BASE}\n\nUser question: ${message}\n\nPlease provide a helpful and informative response about Hemanth:`;
 
-    const response = await fetch(
-      "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-goog-api-key": process.env.GEMINI_API_KEY || "",
-        },
-        body: JSON.stringify({
-          contents: [
-            {
-              parts: [
-                {
-                  text: prompt,
-                },
-              ],
-            },
-          ],
-        }),
+//     const response = await fetch(
+//       "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
+//       {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//           "x-goog-api-key": process.env.GEMINI_API_KEY || "",
+//         },
+//         body: JSON.stringify({
+//           contents: [
+//             {
+//               parts: [
+//                 {
+//                   text: prompt,
+//                 },
+//               ],
+//             },
+//           ],
+//         }),
+//       }
+//     );
+
+//     if (!response.ok) {
+//       throw new Error(`API call failed: ${response.statusText}`);
+//     }
+
+//     const data = await response.json();
+
+//     // Extract the actual text response from Gemini API
+//     const aiResponse = data.candidates?.[0]?.content?.parts?.[0]?.text;
+
+//     if (!aiResponse) {
+//       throw new Error("No valid response from Gemini API");
+//     }
+
+//     // Return the AI response
+//     res.status(200).json({ response: aiResponse });
+//   } catch (error) {
+//     console.error("Error processing request:", error);
+//     res.status(500).json({ 
+//       error: "Failed to get response from AI",
+//       details: error instanceof Error ? error.message : "Unknown error"
+//     });
+//   }
+// }
+
+import { getEnv } from '@vercel/functions';
+
+export default {
+  async fetch(request: Request) {
+    try {
+      // Parse the request body (expects JSON { prompt: string })
+      const { message } = await request.json();
+
+      // Get your secret key from environment variables
+      const env = getEnv() as unknown as Record<string, string | undefined>;
+      const GEMINI_API_KEY = env.GEMINI_API_KEY ?? process.env.GEMINI_API_KEY;
+      if (!GEMINI_API_KEY) {
+        return new Response(
+          JSON.stringify({ error: "Missing GEMINI_API_KEY in environment" }),
+          { status: 500, headers: { "Content-Type": "application/json" } }
+        );
       }
-    );
 
-    if (!response.ok) {
-      throw new Error(`API call failed: ${response.statusText}`);
+      const prompt = `${HEMANTH_KNOWLEDGE_BASE}\n\nUser question: ${message}\n\nPlease provide a helpful and informative response about Hemanth:`;
+
+      // Call the Gemini API
+      const geminiResponse = await fetch(
+        "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-goog-api-key": GEMINI_API_KEY,
+          },
+          body: JSON.stringify({
+            contents: [
+              {
+                parts: [{ text: prompt }],
+              },
+            ],
+          }),
+        }
+      );
+
+      const data = await geminiResponse.json();
+
+      return new Response(JSON.stringify(data), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      });
+    } catch (err: any) {
+      return new Response(JSON.stringify({ error: err.message }), {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      });
     }
-
-    const data = await response.json();
-
-    // Extract the actual text response from Gemini API
-    const aiResponse = data.candidates?.[0]?.content?.parts?.[0]?.text;
-
-    if (!aiResponse) {
-      throw new Error("No valid response from Gemini API");
-    }
-
-    // Return the AI response
-    res.status(200).json({ response: aiResponse });
-  } catch (error) {
-    console.error("Error processing request:", error);
-    res.status(500).json({ 
-      error: "Failed to get response from AI",
-      details: error instanceof Error ? error.message : "Unknown error"
-    });
-  }
-}
+  },
+};
