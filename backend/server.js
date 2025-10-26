@@ -1,10 +1,9 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import fetch from 'node-fetch';
+// import express from 'express';
+// import bodyParser from 'body-parser';
+// import fetch from 'node-fetch';
 
-const app = express();
-app.use(bodyParser.json());
-
+const express = require('express');
+const cors = require('cors');
 
 const HEMANTH_KNOWLEDGE_BASE = `
 You are Hemanth's AI assistant on his portfolio website. You know everything about Hemanthsaikumar Challapalli and should provide helpful, accurate information about him. Here's what you need to know:
@@ -72,6 +71,13 @@ Always be encouraging about potential collaborations and highlight Hemanth's inn
 `;
 
 
+
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+
+// Your existing route
 app.post('/api/chat', async (req, res) => {
   const { message } = req.body;
   const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
@@ -114,4 +120,5 @@ app.post('/api/chat', async (req, res) => {
   }
 });
 
-export default app;
+// Export for Vercel serverless
+module.exports = app;
