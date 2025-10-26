@@ -1,9 +1,4 @@
-// import express from 'express';
-// import bodyParser from 'body-parser';
-// import fetch from 'node-fetch';
 
-const express = require('express');
-const cors = require('cors');
 
 const HEMANTH_KNOWLEDGE_BASE = `
 You are Hemanth's AI assistant on his portfolio website. You know everything about Hemanthsaikumar Challapalli and should provide helpful, accurate information about him. Here's what you need to know:
@@ -69,22 +64,92 @@ You can help visitors:
 
 Always be encouraging about potential collaborations and highlight Hemanth's innovative approach to AI/ML engineering.
 `;
+// export default async function handler(req: VercelRequest, res: VercelResponse) {
+//   if (req.method !== "POST") {
+//     return res.status(405).json({ error: "Method not allowed" });
+//   }
 
+//   const { message } = req.body;
 
+//   if (!message) {
+//     return res.status(400).json({ error: "Message is required" });
+//   }
 
-const app = express();
+//   try {
+//     // Combine knowledge base with user message
+//     const prompt = `${HEMANTH_KNOWLEDGE_BASE}\n\nUser question: ${message}\n\nPlease provide a helpful and informative response about Hemanth:`;
 
-app.use(cors());
-app.use(express.json());
+//     const response = await fetch(
+//       "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
+//       {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//           "x-goog-api-key": process.env.GEMINI_API_KEY || "",
+//         },
+//         body: JSON.stringify({
+//           contents: [
+//             {
+//               parts: [
+//                 {
+//                   text: prompt,
+//                 },
+//               ],
+//             },
+//           ],
+//         }),
+//       }
+//     );
 
-// Your existing route
-app.post('/api/chat', async (req, res) => {
+//     if (!response.ok) {
+//       throw new Error(`API call failed: ${response.statusText}`);
+//     }
+
+//     const data = await response.json();
+
+//     // Extract the actual text response from Gemini API
+//     const aiResponse = data.candidates?.[0]?.content?.parts?.[0]?.text;
+
+//     if (!aiResponse) {
+//       throw new Error("No valid response from Gemini API");
+//     }
+
+//     // Return the AI response
+//     res.status(200).json({ response: aiResponse });
+//   } catch (error) {
+//     console.error("Error processing request:", error);
+//     res.status(500).json({ 
+//       error: "Failed to get response from AI",
+//       details: error instanceof Error ? error.message : "Unknown error"
+//     });
+//   }
+// }
+
+export default async function handler(req, res) {
+  // Enable CORS
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
+  res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
+
+  // Handle OPTIONS request for CORS
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
+
+  // Only allow POST requests
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
   const { message } = req.body;
   const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
   if (!GEMINI_API_KEY) {
     return res.status(500).json({ error: "Missing GEMINI_API_KEY in environment" });
   }
+  
   if (!message) {
     return res.status(400).json({ error: "Message is required" });
   }
@@ -109,16 +174,23 @@ app.post('/api/chat', async (req, res) => {
         }),
       }
     );
+
+    if (!response.ok) {
+      throw new Error(`Gemini API error: ${response.status}`);
+    }
+
     const data = await response.json();
     const aiResponse = data.candidates?.[0]?.content?.parts?.[0]?.text;
+    
     if (!aiResponse) {
       throw new Error("No valid response from Gemini API");
     }
-    res.status(200).json({ response: aiResponse });
-  } catch (error) {
-    res.status(500).json({ error: error.message || "Unknown error" });
-  }
-});
 
-// Export for Vercel serverless
-module.exports = app;
+    return res.status(200).json({ response: aiResponse });
+  } catch (error) {
+    console.error("Error:", error);
+    return res.status(500).json({ 
+      error: error.message || "Unknown error occurred" 
+    });
+  }
+}
