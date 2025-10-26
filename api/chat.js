@@ -10,7 +10,7 @@ PERSONAL INFORMATION:
 - Email: challapallihemanthsaikumar@gmail.com
 - Phone: 856-656-8253
 - LinkedIn: https://www.linkedin.com/in/challapalli-hemanth-sai-kumar-7595931b0/
-- YouTube: https://youtube.com/@hemanthsaikumar
+- YouTube: https://www.youtube.com/@hemanthchowdary8184
 - GitHub: ChallapalliHemanthsaikumar
 
 PROFESSIONAL SUMMARY:
@@ -29,7 +29,7 @@ TECHNICAL SKILLS:
 - Cloud & MLOps: Azure ML, AWS, Docker, Kubernetes, Apache Airflow, MLflow
 - Frontend: React, Angular, Next.js, Vite
 - Backend: FastAPI, Node.js, gRPC
-- Databases: PostgreSQL, MongoDB, Vector Databases (Pinecone, AI Search)
+- Databases: Fabric, Azure SQL, AISearch,pqsql
 
 CERTIFICATIONS:
 - Azure AI Engineer Associate (Microsoft)
