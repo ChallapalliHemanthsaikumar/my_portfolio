@@ -9,28 +9,3 @@
     }
   ]
 }
-```
-
-That's it! Much simpler now.
-
-## Explanation:
-
-- **`buildCommand`**: Tells Vercel to run `npm run build` to build your React app
-- **`outputDirectory`**: Tells Vercel where the built files are (Create React App outputs to `build/`)
-- **`rewrites`**: Routes `/api/*` requests to your serverless functions in the `api/` folder
-
-## Your Project Structure Should Be:
-```
-your-project/
-├── api/
-│   └── chat.js              # Serverless function
-├── src/                     # React source code
-│   ├── App.js
-│   ├── index.js
-│   └── ...
-├── public/
-│   ├── index.html
-│   └── ...
-├── package.json             # Root package.json with React scripts
-├── vercel.json              # Updated config
-└── .gitignore
