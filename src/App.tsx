@@ -3,6 +3,7 @@ import HeroSection from './components/HeroSection';
 import ProjectsSection from './components/ProjectsSection';
 import OpenSourceSection from './components/OpenSourceSection';
 import YouTubeSection from './components/YouTubeSection';
+import GameSection from './components/GameSection';
 import SkillsSection from './components/SkillsSection';
 import ContactSection from './components/ContactSection';
 import Navbar from './components/Navbar';
@@ -18,6 +19,7 @@ function App() {
         <ProjectsSection />
         <OpenSourceSection />
         <YouTubeSection />
+        <GameSection />
         <SkillsSection />
         <ContactSection />
       </main>
