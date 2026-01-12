@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "946318285336",
+    "project_id": "mountainclimber-7a3b1",
+    "storage_bucket": "mountainclimber-7a3b1.firebasestorage.app",
+    "firebase_url": "https://mountainclimber-7a3b1-default-rtdb.firebaseio.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:946318285336:android:903dbd7809b60c6ed8c16d",
+        "android_client_info": {
+          "package_name": "com.mountainclimber"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMch4dgaQluGKMNuG4ZKo_-kzwUyBzp8M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
